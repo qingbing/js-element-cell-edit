@@ -4,6 +4,7 @@
     <el-switch
       v-if="type == 'switch'"
       v-model="row[property]"
+      :disabled="!editable"
       @change="handleBlur"
       active-value="1"
       inactive-value="0"
@@ -11,7 +12,7 @@
     </el-switch>
 
     <!-- editing -->
-    <template v-if="isEditing">
+    <template v-if="isEditing && editable">
       <!-- input-text -->
       <el-input
         v-if="type == 'text'"
@@ -57,7 +58,7 @@
       </el-select>
     </template>
     <!-- view -->
-    <template v-if="!isEditing">
+    <template v-if="!isEditing || !editable">
       <span v-if="type == 'text'">{{ row[property] }}</span>
       <span v-if="type == 'textarea'">{{ row[property] }}</span>
       <span v-if="type == 'number'">{{ row[property] }}</span>
@@ -81,10 +82,16 @@ export default {
     // 行记录
     row: {
       type: Object,
+      require: true,
     },
-    // 保存后台的方法， 相比 params.saveCallback， 改方法优先
+    // 可编辑
+    editable: {
+      type: Boolean,
+      default: true,
+    },
+    // 保存后台的方法， 相比 params.saveCallback， 该方法优先
     saveCallback: {
-      type: Object,
+      type: Function,
       default: undefined,
     },
     // 传递的参数
@@ -138,6 +145,9 @@ export default {
   methods: {
     // 开启编辑
     handleEdit() {
+      if (!this.editable) {
+        return;
+      }
       this.oldValue = this.row[this.property];
       this.isEditing = true;
     },
