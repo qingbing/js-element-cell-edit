@@ -22,7 +22,7 @@ npm install @qingbing/element-cell-edit
 | saveCallback | 属性 | Function | 否 | undefined |
 | params | 属性 | Object | 否 | {} |
 
-## 3. 使用shi li
+## 3. 使用示例
 ```vue
 <template>
   <div>
