@@ -6,6 +6,7 @@
 - 1.0.1 : 完善备注
   - 修改bug ： saveCallback的类型由“Object”改为“Function”
   - 添加 editable 属性，控制是否可编辑
+- 1.0.2 : 完善备注
 
 ## 1. 安装
 ```
@@ -14,13 +15,13 @@ npm install @qingbing/element-cell-edit
 
 ## 2. 参数介绍
 
-| 参数名 | 参数类型 | 数据类型 | 必填 | 默认 |
-|:---|:---|:---|:---|:---|
-| property | 属性 | String | 是 | - |
-| row | 属性 | Object | 是 | - |
-| editable | 属性 | Boolean | 否 | true |
-| saveCallback | 属性 | Function | 否 | undefined |
-| params | 属性 | Object | 否 | {} |
+| 参数名 | 参数类型 | 数据类型 | 必填 | 默认 | 描述 |
+|:---|:---|:---|:---|:---|:---|
+| property | 属性 | String | 是 | - | 属性 |
+| row | 属性 | Object | 是 | - | 行记录 |
+| editable | 属性 | Boolean | 否 | true | 可编辑 |
+| saveCallback | 属性 | Function | 否 | undefined | 保存后台的方法， 相比 params.saveCallback， 该方法优先 |
+| params | 属性 | Object | 否 | {} | 传递的参数 |
 
 ## 3. 使用示例
 ```vue
