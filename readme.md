@@ -7,6 +7,7 @@
   - 修改bug ： saveCallback的类型由“Object”改为“Function”
   - 添加 editable 属性，控制是否可编辑
 - 1.0.2 : 完善备注
+- 1.0.3 : select 增加清除功能
 
 ## 1. 安装
 ```

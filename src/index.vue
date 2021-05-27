@@ -46,6 +46,7 @@
         v-model="row[property]"
         @blur="handleBlur"
         v-focus
+        clearable
         style="width: 100%"
       >
         <el-option

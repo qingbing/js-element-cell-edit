@@ -1,6 +1,6 @@
 {
   "name": "@qingbing/element-cell-edit",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "封装 cell 的编辑，目前主要用于 table-cell 中",
   "main": "src/index.vue",
   "scripts": {
