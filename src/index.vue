@@ -173,7 +173,11 @@ export default {
     // 保存后回调
     afterSavecallback(status) {
       if (true !== status) {
-        this.row[this.property] = this.oldValue;
+        if ("switch" === this.type) {
+          this.row[this.property] = this.row[this.property] ? "1" : "0";
+        } else {
+          this.row[this.property] = this.oldValue;
+        }
       }
       this.isEditing = false;
     },
