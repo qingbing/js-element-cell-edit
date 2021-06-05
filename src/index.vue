@@ -6,8 +6,8 @@
       v-model="row[property]"
       :disabled="!editable"
       @change="handleBlur"
-      active-value="1"
-      inactive-value="0"
+      :active-value="switchActiveValue"
+      :inactive-value="switchInActiveValue"
     >
     </el-switch>
 
@@ -70,7 +70,7 @@
 
 <script>
 // 导入函数
-import { isFunction, dump } from "@qingbing/helper";
+import { isFunction, isUndefined, dump } from "@qingbing/helper";
 
 // 导出
 export default {
@@ -114,8 +114,24 @@ export default {
       case "text":
       case "number": // 只能输入数字
       case "textarea":
+        break;
       case "switch": // 只支持 "0", "1"；难得做值的自定义
-        this.row[this.property] += "";
+        if (
+          isUndefined(this.params.options) ||
+          isUndefined(this.params.options.activeValue)
+        ) {
+          this.switchActiveValue = 1;
+        } else {
+          this.switchActiveValue = this.params.options.activeValue;
+        }
+        if (
+          isUndefined(this.params.options) ||
+          isUndefined(this.params.options.inActiveValue)
+        ) {
+          this.switchInActiveValue = 0;
+        } else {
+          this.switchInActiveValue = this.params.options.inActiveValue;
+        }
         break;
       case "select":
         this.ops = this.params.options ?? {};
@@ -174,7 +190,9 @@ export default {
     afterSavecallback(status) {
       if (true !== status) {
         if ("switch" === this.type) {
-          this.row[this.property] = this.row[this.property] ? "1" : "0";
+          this.row[this.property] = this.row[this.property]
+            ? this.switchActiveValue
+            : this.switchInActiveValue;
         } else {
           this.row[this.property] = this.oldValue;
         }
