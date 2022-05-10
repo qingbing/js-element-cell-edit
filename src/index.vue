@@ -120,7 +120,11 @@ export default {
           isUndefined(this.params.options) ||
           isUndefined(this.params.options.activeValue)
         ) {
-          this.switchActiveValue = 1;
+          if (typeof this.row[this.property] === "number") {
+            this.switchActiveValue = 1;
+          } else {
+            this.switchActiveValue = "1";
+          }
         } else {
           this.switchActiveValue = this.params.options.activeValue;
         }
@@ -128,7 +132,11 @@ export default {
           isUndefined(this.params.options) ||
           isUndefined(this.params.options.inActiveValue)
         ) {
-          this.switchInActiveValue = 0;
+          if (typeof this.row[this.property] === "number") {
+            this.switchInActiveValue = 0;
+          } else {
+            this.switchInActiveValue = "0";
+          }
         } else {
           this.switchInActiveValue = this.params.options.inActiveValue;
         }
@@ -190,9 +198,10 @@ export default {
     afterSavecallback(status) {
       if (true !== status) {
         if ("switch" === this.type) {
-          this.row[this.property] = this.row[this.property]
-            ? this.switchActiveValue
-            : this.switchInActiveValue;
+          this.row[this.property] =
+            this.row[this.property] === this.switchInActiveValue
+              ? this.switchActiveValue
+              : this.switchInActiveValue;
         } else {
           this.row[this.property] = this.oldValue;
         }
