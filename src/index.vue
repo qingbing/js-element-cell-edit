@@ -1,5 +1,5 @@
 <template>
-  <div class="edit-cell" @click="handleEdit">
+  <div class="edit-cell" @click.capture="handleEdit">
     <!-- switch -->
     <el-switch
       v-if="type == 'switch'"
@@ -149,7 +149,7 @@ export default {
     }
     return {
       type: this.params.type,
-      oldValue: "",
+      oldValue: this.row[this.property],
       isEditing: false,
     };
   },
@@ -202,6 +202,7 @@ export default {
             this.row[this.property] === this.switchInActiveValue
               ? this.switchActiveValue
               : this.switchInActiveValue;
+          this.oldValue = this.row[this.property];
         } else {
           this.row[this.property] = this.oldValue;
         }
